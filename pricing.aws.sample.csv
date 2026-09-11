@@ -1,0 +1,24 @@
+resourceType,attribute,unit,unitPriceUsd
+# AWS rates. Replace with your own rate card (or Cost Explorer effective rates)
+# before trusting the Potential Savings column. Values below are us-east-1
+# on-demand list prices and are placeholders.
+#
+# units: gib-month  -> price x size in GiB
+#        unit-month -> price x quantity (provisioned IOPS, MiB/s)
+#        hour       -> price x 730
+ebs_storage,gp2,gib-month,0.100000
+ebs_storage,gp3,gib-month,0.080000
+ebs_storage,io1,gib-month,0.125000
+ebs_storage,io2,gib-month,0.125000
+ebs_storage,st1,gib-month,0.045000
+ebs_storage,sc1,gib-month,0.015000
+ebs_storage,standard,gib-month,0.050000
+# gp3 includes 3000 IOPS and 125 MiB/s at no charge; these are the rates for
+# anything provisioned above that baseline.
+ebs_iops,gp3,unit-month,0.005000
+ebs_throughput,gp3,unit-month,0.040000
+# io1 is a flat per-provisioned-IOPS rate. io2 is tiered in reality
+# (0.065 up to 32k, 0.046 to 64k, 0.032 beyond); this single rate is the
+# first tier, so io1 -> io2 savings will read low for high-IOPS volumes.
+ebs_iops,io1,unit-month,0.065000
+ebs_iops,io2,unit-month,0.065000
